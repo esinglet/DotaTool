@@ -21,7 +21,7 @@ def main():
 	elif (value == 'ht'):
 		try:
 			
-			file = open('heroes.rtf', 'w+')
+			file = open('heroes.txt', 'w+')
 			dump(api.get_heroes(), file, sort_keys=True,indent=15)
 			file.close()
 		except  e:
