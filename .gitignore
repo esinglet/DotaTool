@@ -2,6 +2,7 @@ __pycache__/
 *.json
 *.txt
 portrates/
+!res/
 !doc/*.txt
 !res/*.txt
 !res/*.json
