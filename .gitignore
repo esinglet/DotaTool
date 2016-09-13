@@ -1,6 +1,7 @@
 __pycache__/
 *.json
 *.txt
+*.png
 !doc/*.txt
 !res/*.txt
 !res/*.json
