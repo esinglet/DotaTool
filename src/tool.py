@@ -53,15 +53,15 @@ def main():
 					os.makedirs("res")
 				os.chdir("res\\")
 
-			if (not os.path.exists("portrates")):
+			if (not os.path.exists("portraits")):
 
-				os.makedirs("portrates")
-				os.makedirs("portrates\\large")
-				os.makedirs("portrates\\small")
+				os.makedirs("portraits")
+				os.makedirs("portraits\\large")
+				os.makedirs("portraits\\small")
 
 			for i in urls:
-				urllib.request.urlretrieve(i[1], "portrates\\large\\"+i[3]+"-large.png")
-				urllib.request.urlretrieve(i[2], "portrates\\small\\"+i[3]+"-small.png")
+				urllib.request.urlretrieve(i[1], "portraits\\large\\"+i[3]+"-large.png")
+				urllib.request.urlretrieve(i[2], "portraits\\small\\"+i[3]+"-small.png")
 
 		except Exception as e:
 			fp.close()
