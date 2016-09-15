@@ -12,7 +12,6 @@ from time import sleep
 def main():
 #Needs enviroment variable set see wiki
 	api = d2.Initialise()
-	urls = []
 	env = os.name
 	pics = False
 
