@@ -2,7 +2,10 @@ __pycache__/
 *.json
 *.txt
 *.png
+<<<<<<< HEAD
 !res/
+=======
+>>>>>>> refs/remotes/origin/matthew
 !doc/*.txt
 !res/*.txt
 !res/*.json
