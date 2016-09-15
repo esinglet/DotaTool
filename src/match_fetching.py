@@ -30,6 +30,14 @@ def match_fetch(count, base):
 
 	print(test_unique(matches))
 	#print(json.dumps(matches))
+	
+	try:
+		file = open('BatchData.json', 'w+')
+		json.dump(matches, file)
+		file.close()
+	except:
+		file.close()
+		raise e
 
 def test_unique(matches):
 	res = True
