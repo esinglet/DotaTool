@@ -16,10 +16,10 @@ def main():
 	env = os.name
 
 	if (len(sys.argv) <= 1):
-                print( 'hj = heros json')
-                print( 'ht = heros text')
-                print( 'p = heros pictures')
-                quit(0)
+				print( 'hj = heros json')
+				print( 'ht = heros text')
+				print( 'p = heros pictures')
+				quit(0)
 
 	#Make a heroes json file
 	if (sys.argv[1] == 'hj'):
@@ -47,24 +47,27 @@ def main():
 	#Requires making a heroes json file first
 	elif (sys.argv[1] == "p" and env == 'nt'):
 		try:
-                        windowsFilesystemPicture()
+			fp = open('heroes.json', 'r+')
+			windowsFilesystemPicture(fp, urls)
 
 		except Exception as e:
-                        fp.close()
-                        raise e
-                        sleep(10)
-        elif (sys.argv[1] == "p" and env == 'posix'):
-                try:
-                        unixFilesystemPicture()
+			fp.close()
+			raise e
+			sleep(10)
+		
+	elif (sys.argv[1] == "p" and env == 'posix'):
+		try:
+			fp = open('heroes.json', 'r+')
+			unixFilesystemPicture(fp, urls)
 
 		except Exception as e:
 			fp.close()
 			raise e
 			sleep(10)
 
-def windowsFilesystemPicture():
-        windowsFilesystemPicture()
-	fp = open('heroes.json', 'r+')
+def windowsFilesystemPicture(fp, urls):
+
+	
 	jhero = json.load(fp)
 	fp.close()
 
@@ -87,9 +90,8 @@ def windowsFilesystemPicture():
 		urllib.request.urlretrieve(i[1], "portraits/large/"+i[3]+"-large.png")
 		urllib.request.urlretrieve(i[2], "portraits/small/"+i[3]+"-small.png")
 
-def unixFilesystemPicture():
-        windowsFilesystemPicture()
-	fp = open('heroes.json', 'r+')
+def unixFilesystemPicture(fp, urls):
+
 	jhero = json.load(fp)
 	fp.close()
 
