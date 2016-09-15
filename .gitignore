@@ -1,8 +1,7 @@
 __pycache__/
 *.json
 *.txt
-portrates/
-!res/
+*.png
 !doc/*.txt
 !res/*.txt
 !res/*.json
