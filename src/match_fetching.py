@@ -8,7 +8,7 @@ def main():
 	#Main function
 	match_fetch(5, 2000000000)
 
-api = d2.Initialise()
+
 
 def match_fetch(count, base):
 
@@ -25,7 +25,6 @@ def match_fetch(count, base):
 			sleep(2)
 				
 		except Exception as e:
-			print(str(i)+" did not work.")
 			raise e
 
 	print(test_unique(matches))
