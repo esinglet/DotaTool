@@ -146,7 +146,7 @@ class Player:
 		elif (type(playerJSON) is str):
 			jPlayer = json.loads(playerJSON)
 		else:
-			raise ConvertError()
+			raise errors.ConvertError()
 
 		self.item_0 = jPlayer['item_0']
 		self.item_1 = jPlayer['item_1']
@@ -179,7 +179,7 @@ class Player:
 		ab_up = jPlayer['ability_upgrades']
 
 		for i in ab_up:
-			ability_upgrades.append(Level(i))
+			ability_upgrades.append(Level(1))
 
 		self.ability_upgrades = ability_upgrades
 
@@ -193,7 +193,7 @@ class Level:
 		elif (type(levelJSON) is str):
 			jLevel = json.loads(levelJSON)
 		else:
-			raise ConvertError()
+			raise errors.ConvertError()
 
 		self.level = jLevel['level']
 		self.ability = jLevel['ability']
