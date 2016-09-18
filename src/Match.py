@@ -60,9 +60,7 @@
 # 0	Non-series
 # 1	Best of 3
 # 2	Best of 5
-
-
-
+	
 import json 
 import errors
 
@@ -82,6 +80,7 @@ def output(jsonOut):
 	except Exception as e:
 		raise e
 
+#Takes 
 #Returns a match json object with players removed
 def removePlayers(match):
 	js = json.loads('{}')
@@ -101,10 +100,20 @@ def removePlayers(match):
 #good for grasping the data we have available to us with this method of polling matches
 
 class Match:
+
+	#Constructor
 	def __init__(self, matchJSON):
+
 		players = []
 
-		jMatch = json.loads(matchJSON)
+		if (type(matchJSON) is dict):
+			jMatch = matchJSON
+		elif (type(matchJSON) is str):
+			jMatch = json.loads(matchJSON)
+		else:
+			raise errors.jsonConversionError()
+
+
 		self.radiant_win = jMatch['radiant_win']
 		self.leagueid = jMatch['leagueid']
 		self.tower_status_radiant = jMatch['tower_status_radiant']
@@ -134,7 +143,19 @@ class Match:
 			players.append(Player(i))
 
 		self.players = players
+		self.__iterable = list(self.__dict__.items())
+		#End Construsctor
 
+	def __iter__(self):
+		return self
+
+	def __next__(self):
+		try:
+			a = self.__iterable.pop()
+			return a
+		except IndexError:
+			self.__iterable = list(self.__dict__.items())
+			raise StopIteration
 
 class Player:
 	def __init__(self, playerJSON):
@@ -146,7 +167,7 @@ class Player:
 		elif (type(playerJSON) is str):
 			jPlayer = json.loads(playerJSON)
 		else:
-			raise errors.ConvertError()
+			raise errors.jsonConversionError()
 
 		self.item_0 = jPlayer['item_0']
 		self.item_1 = jPlayer['item_1']
@@ -179,9 +200,22 @@ class Player:
 		ab_up = jPlayer['ability_upgrades']
 
 		for i in ab_up:
-			ability_upgrades.append(Level(1))
+			ability_upgrades.append(Level(i))
 
 		self.ability_upgrades = ability_upgrades
+		self.__iterable = list(self.__dict__.items())
+
+	def __iter__(self):
+		return self
+
+	def __next__(self):
+		try:
+			a = self.__iterable.pop()
+			return a
+		except IndexError:
+			self.__iterable = list(self.__dict__.items())
+			raise StopIteration
+			
 
 
 
@@ -193,16 +227,36 @@ class Level:
 		elif (type(levelJSON) is str):
 			jLevel = json.loads(levelJSON)
 		else:
-			raise errors.ConvertError()
+			raise errors.jsonConversionError()
 
 		self.level = jLevel['level']
 		self.ability = jLevel['ability']
 		self.time = jLevel['time']
 
+		self.__iterable = list(self.__dict__.items())
+
+	def __iter__(self):
+		return self
+
+	def __next__(self):
+		try:
+			a = self.__iterable.pop()
+			return a
+		except IndexError:
+			self.__iterable = list(self.__dict__.items())
+			raise StopIteration
+			
+
 
 
 if __name__ == '__main__':
 	a = Match(test)
-	print(a.players[0].ability_upgrades[0].ability)
+	for k, v in a:
+		print(k)
+		print(v)
+
+	for k, v in a:
+		print(k)
+		print(v)
 
 	

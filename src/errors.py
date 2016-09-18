@@ -1,5 +1,5 @@
 
-class ConvertError(Exception):
+class jsonConversionError(Exception):
 	def __init__(self):
 		self.message = "Match -> Object conversion error"
 	def __str__(self):
