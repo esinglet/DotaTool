@@ -10,8 +10,7 @@ import json
 def main():
 	#Main function
 	api = d2.Initialise()
-	match_fetch(2000000000, 2000001000, api)
-	# print(json.JSONEncoder().encode(match_fetch(2000000000, 2000001000, api)))
+	print(json.JSONEncoder().encode(match_fetch(2000000000, 2000001000, api)))
 
 
 #Returns dictionary with 'matches' keyd to list of match dictionariesa
@@ -31,9 +30,10 @@ def match_fetch(base, cap, api):
 			else:
 				matches['matches'].extend(dicti['matches'])
 			inc = int(matches['matches'][-1]["match_seq_num"]) - base + 1
-			sleep(2)
+			sleep(1)
 				
 		except Exception as e:
+
 			raise e
 
 def test_unique(matches):
