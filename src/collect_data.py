@@ -5,16 +5,22 @@ import dota2api as d2
 import match_fetching
 import os
 
-from pprint import pprint
-
 import json
 
 queue = []
+tStatus = []
 
 key1 = os.environ['D2_API_KEY'] 
 key2 = os.environ['D2_API_KEY2'] 
 
-def data_fetch(dEvent, api, base, cap, qLock):
+class ThreadData:
+
+	def __init__(self, ret, error):
+		self.ret = ret
+		self.error = error
+
+
+def data_fetch(i, dEvent, api, base, cap, qLock):
 	global queue
 
 	matches = match_fetching.match_fetch(base, cap, api)
@@ -23,6 +29,8 @@ def data_fetch(dEvent, api, base, cap, qLock):
 	queue.append(matches)
 	dEvent.set()
 	qLock.release()
+
+	# Handle errorstStatus[0] = ThreadData(0,0)
 
 
 def data_write(dEvent, qLock):
@@ -47,8 +55,12 @@ def main():
 	e.clear()
 	api_1 = d2.Initialise(key1)
 
-	t1 = threading.Thread(name='reading_1', target=data_fetch, kwargs=dict(dEvent=e, api=api_1, base=2000000000, cap=2000001000, qLock=queueLock))
+	t1 = threading.Thread(name='reading_1', target=data_fetch, kwargs=dict(i=0, dEvent=e, api=api_1, base=2000000000, cap=2000001000, qLock=queueLock))
 	t2 = threading.Thread(name='writing_1', target=data_write, kwargs=dict(dEvent=e, qLock=queueLock))
+
+	while(True):
+		if(not t1.isis_alive()):
+			pass
 
 	t1.start()
 	t2.start()
