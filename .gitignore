@@ -1,6 +1,6 @@
 __pycache__/
 *.json
-sec/collect_data.py
+src/collect_data.py
 *.png
 <<<<<<< HEAD
 !res/
