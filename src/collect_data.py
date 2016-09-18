@@ -36,7 +36,7 @@ def data_write(dEvent, qLock):
 		qLock.release()
 
 		for i in data['matches']:
-			m = match.Match(data['matches'][0])
+			m = match.Match(data['matches'][i])
 			#do something with m
 
 
