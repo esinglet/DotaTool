@@ -38,18 +38,16 @@ def data_write(dEvent, qLock):
 	while(dEvent.wait()):
 		qLock.acquire()
 		data = queue.pop(0)
-		if len(queue) == 0:
-			#dEvent.clear()
-			return
+
 		qLock.release()
 
-		for i in data['matches']:
-			m = match.Match(data['matches'][i])
-			#do something with m
+		# for i in data['matches']:
+		# 	m = match.Match(data['matches'][i])
+		# 	#do something with m
 
 
 def main():
-
+	global queueLock
 	queueLock = threading.Lock()
 	e = threading.Event()
 	e.clear()
@@ -58,8 +56,12 @@ def main():
 	t1 = threading.Thread(name='reading_1', target=data_fetch, kwargs=dict(i=0, dEvent=e, api=api_1, base=2000000000, cap=2000001000, qLock=queueLock))
 	t2 = threading.Thread(name='writing_1', target=data_write, kwargs=dict(dEvent=e, qLock=queueLock))
 
+	##loop
 	while(True):
-		if(not t1.isis_alive()):
+
+		if len(queue) == 0:
+			dEvent.clear()
+		if(not t1.is_alive()):
 			pass
 
 	t1.start()
